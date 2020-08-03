@@ -91,7 +91,7 @@ static关键字还有一个比较关键的作用就是 用来形成静态代码�
 
 举个例子：
 
-```
+```java
 class Person{
     private Date birthDate;
 
@@ -104,12 +104,12 @@ class Person{
         Date endDate = Date.valueOf("1964");
         return birthDate.compareTo(startDate)>=0 && birthDate.compareTo(endDate) < 0;
     }
-}12345678910111213
+}
 ```
 
 isBornBoomer是用来这个人是否是1946-1964年出生的，而每次isBornBoomer被调用的时候，都会生成startDate和birthDate两个对象，造成了空间浪费，如果改成这样效率会更好：
 
-```
+```java
 class Person{
     private Date birthDate;
     private static Date startDate,endDate;
@@ -126,7 +126,7 @@ class Person{
     boolean isBornBoomer() {
         return birthDate.compareTo(startDate)>=0 && birthDate.compareTo(endDate) < 0;
     }
-}1234567891011121314151617
+}
 ```
 
 ## 静态导包
