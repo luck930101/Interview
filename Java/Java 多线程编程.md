@@ -92,7 +92,43 @@ void start();
 
 ## 实例
 
-class RunnableDemo implements Runnable {    private Thread t;    private String threadName;        RunnableDemo( String name) {       threadName = name;       System.out.println("Creating " +  threadName );    }        public void run() {       System.out.println("Running " +  threadName );       try {          for(int i = 4; i > 0; i--) {             System.out.println("Thread: " + threadName + ", " + i);             // 让线程睡眠一会             Thread.sleep(50);          }       }catch (InterruptedException e) {          System.out.println("Thread " +  threadName + " interrupted.");       }       System.out.println("Thread " +  threadName + " exiting.");    }        public void start () {       System.out.println("Starting " +  threadName );       if (t == null) {          t = new Thread (this, threadName);          t.start ();       }    } }   public class TestThread {      public static void main(String args[]) {       RunnableDemo R1 = new RunnableDemo( "Thread-1");       R1.start();              RunnableDemo R2 = new RunnableDemo( "Thread-2");       R2.start();    }    }
+```java
+class RunnableDemo implements Runnable {    
+    private Thread t;    
+    private String threadName;        
+    RunnableDemo( String name) {       
+        threadName = name;       
+        System.out.println("Creating " +  threadName );    
+    }        
+    public void run() {       
+    System.out.println("Running " +  threadName );       
+    try {          
+        for(int i = 4; i > 0; i--) {             
+            System.out.println("Thread: " + threadName + ", " + i);// 让线程睡眠一会    
+            Thread.sleep(50);          
+        }       
+    }catch (InterruptedException e) {          
+    		System.out.println("Thread " +  threadName + " interrupted.");       
+    }       
+    		System.out.println("Thread " +  threadName + " exiting.");    
+    }        
+    public void start () {       
+    		System.out.println("Starting " +  threadName );       
+        if (t == null) {          
+            t = new Thread (this, threadName);          
+            t.start ();       
+        		}    
+    		} 
+		}   
+    public class TestThread {      
+    		public static void main(String args[]) {       
+    		RunnableDemo R1 = new RunnableDemo( "Thread-1");       
+    		R1.start();              
+    		RunnableDemo R2 = new RunnableDemo( "Thread-2");       
+   			R2.start();    
+      	}    
+}
+```
 
 
 
@@ -222,19 +258,27 @@ Thread Thread-2 exiting.
 
 ## DisplayMessage.java 文件代码：
 
+```
 // 文件名 : DisplayMessage.java // 通过实现 Runnable 接口创建线程 public class DisplayMessage implements Runnable {    private String message;        public DisplayMessage(String message) {       this.message = message;    }        public void run() {       while(true) {          System.out.println(message);       }    } }
+```
 
 
 
 ## GuessANumber.java 文件代码：
 
+```
 // 文件名 : GuessANumber.java // 通过继承 Thread 类创建线程   public class GuessANumber extends Thread {    private int number;    public GuessANumber(int number) {       this.number = number;    }        public void run() {       int counter = 0;       int guess = 0;       do {          guess = (int) (Math.random() * 100 + 1);          System.out.println(this.getName() + " guesses " + guess);          counter++;       } while(guess != number);       System.out.println("** Correct!" + this.getName() + "in" + counter + "guesses.**");    } }
+
+
+```
 
 
 
 ## ThreadClassDemo.java 文件代码：
 
+```
 // 文件名 : ThreadClassDemo.java public class ThreadClassDemo {      public static void main(String [] args) {       Runnable hello = new DisplayMessage("Hello");       Thread thread1 = new Thread(hello);       thread1.setDaemon(true);       thread1.setName("hello");       System.out.println("Starting hello thread...");       thread1.start();              Runnable bye = new DisplayMessage("Goodbye");       Thread thread2 = new Thread(bye);       thread2.setPriority(Thread.MIN_PRIORITY);       thread2.setDaemon(true);       System.out.println("Starting goodbye thread...");       thread2.start();         System.out.println("Starting thread3...");       Thread thread3 = new GuessANumber(27);       thread3.start();       try {          thread3.join();       }catch(InterruptedException e) {          System.out.println("Thread interrupted.");       }       System.out.println("Starting thread4...");       Thread thread4 = new GuessANumber(75);              thread4.start();       System.out.println("main() is ending...");    } }
+```
 
 
 
@@ -325,3 +369,130 @@ public class CallableThreadTest implements Callable<Integer> {
 通过对多线程的使用，可以编写出非常高效的程序。不过请注意，如果你创建太多的线程，程序执行的效率实际上是降低了，而不是提升了。
 
 请记住，上下文的切换开销也很重要，如果你创建了太多的线程，CPU 花费在上下文的切换的时间将多于执行程序的时间！
+
+------
+
+## JAVA多线程，真的提高了效率吗？
+
+
+
+在面试的时候被问了一个多线程的问题
+ 回来仔细思考了一下，多线程是否真的能提高了效率？
+ 我对多线程的理解就是：
+ 比如挖一个隧道，有2种开工方法
+ 1、只在山的一头挖，直至挖到山的另一头，从而打通隧道，这可以看成是单线程
+ 
+ 2、在山的两头挖，同时开工，最后在山的中间接通，从而打通隧道，这感觉肯定比1快了很多，好比多线程
+ 
+ 但是2成立的前提是必须有两个工人。而我们的计算机中一般来说只有一个CPU，也就是说只有一个工人。
+ 多线程不过是CPU在不同的时间片之间切换，而表现出齐头并进的样子。
+ 
+ 既然挖隧道的人只有一个，虽然我的施工方案是在山的两头开挖，但是由于工作的人只有一个，所以只有让这个人在山的两头跑，挖一会这头再去挖另一头，来回跑是要花费额外时间的（好比线程的切换和调度）。
+ 
+ 那么，我们是不是可以说，在单CPU的机器中，多线程反而降低了效率呢？
+ 
+ 1.
+ 不能一概而论，你的看多线程在你的程序中为啥而生。在单cpu系统，比如有io的等待，多线程也能提高效率
+ 2
+ 楼主提的问题很有意思。经典的解释是 －如果cpu确实是一个挖山工人，那么它工作就好像是挖1个小时，然后休息10个小时；这期间如果让它跑到山那头继续挖，效率还是很高的。
+ 
+ 现在问题是 －它是否工作1小时然后休息10小时？答案是肯定的。现在的程序时间大多花在读取数据上，真正的计算工作花时间还是相对少的，因此cpu很大时间表现都很闲，就像挖山，挖土效率高，运土效率低。多线程就是要充分利用它的挖土效率
+ 3
+ pc机不光只一个cpu，cpu和其它硬件设备一起才能完成计算，分工协作，但可能出现其中某个家伙偷懒或效率低，导致大家都等它，闲着的其它设备这个时候可以腾出手来干其它活。单cpu在同一时刻只能干一件事情，这没有问题，问题是它并不是7*24*3600都在干活，其它设备也是同样的道理，多线程的目的可以最大限度的提高硬件设备的利用率。
+ 4
+ 同一个设备可以同时干几件事情，但一个设备在同一时刻肯定只能干一件事情，一般我们说并行或串行，都在以时间段来看的而不是以时刻来看的，比如你一边上je消遣还一边写代码干活，在一定的时间范围内，你是并行的，但如果这个时间范围你划分得非常非常短，那么你是串行的
+ 
+ 5
+ 一个cpu可以多线程。但是一个单核的cpu任何时间点，都只能在做一个任务。
+ 如果只是像楼主说的挖隧道这么简单的事，那么的确多线程没用。
+ 只不过很可惜，计算机不像拿铁锹挖隧道这么简单。
+ 
+ 6
+ 假设每挖5分钟，就需要清理一下挖出来的石土。有一个小车在清理它们。
+ 工人只有一个。
+ 单线程的做法是： 挖5分钟。然后工人停止挖，小车清理石土的5分钟里，工人在等待。
+ 2个线程的做发是： 挖5分钟，小车来清理石土。这5分钟里，工人在另一头挖。
+ 
+ 也不是很恰当的比喻。不过至少能说明点问题。
+ 小车清理石土，就相当于磁盘io等相对于cpu计算来说比较慢的操作。
+ 
+ cpu不会等着io的完成，而去执行另一个进程的计算任务。
+ 这边io完成时好象是会发出什么信号来着，忘了。计算机原理都还给老师了，惭愧啊。
+ 7
+ 
+ 如楼主所举的例子,我来解惑。
+ 
+ 如果一个机器人代表CUP，哪么这个机器人一天所做的事情，并不都是只挖山。
+ 
+ 它还有许多事情要做，比如砍柴，烧水，钓鱼，挖山等等等。
+ 
+ 如果按以上划分是 4条线程， 每一个线程大概占用1/4CUP时间。
+ 
+ 如果你的设定 在挖山这一快 多设几次同一个任务。 比如设定到 挖山共有3条线程。
+ 
+ 哪么 挖山的CUP占用率将达到 1/2 这就是所谓的提高了效率。
+ 
+ 现实中的CPU 在大部分时候的 闲置状态的。
+ 因此 开多条线程能提高效率 不如说成是 充分利用了CPU执行时间。
+ 
+ 8
+ 楼主举的例子是并行，在资源有剩余的情况下（比如人都堆到一个洞里干不开），肯定是提高效率。如果资源有冲突（人手只够从一个方向挖，比如只一个CPU），那就是并发了，不一定能提高效率。
+ 
+ 我想了个例子：
+  
+
+  假设人手只够从一个方向挖洞。
+    挖洞时，总得把洞里的土运出去吧。洞越深，运土越占用时间，如果一大伙人都在那挖洞，等挖出一车土，然后一起坐着车运土（带装卸），那路上那些人就闲着了（挖土时司机也会闲着）。为了提高工作效率，那就把人分成三组，一组人（一个挖土线程）挖土，两组人运土（两辆车，两个运土线程）。
+ 
+ 9
+ 
+ 我认为啊，单CPU单核、纯计算、没IO的理想状态下，单个线程肯定比多个线程快，因为省去了线程切换的开销。但真实的环境基本都有IO操作，在异步的业务场景下，我一般会使用线程池，至于线程池的线程数目配置为多少，有资料推荐为N×（1+IO耗时/完整的业务耗时），N是CPU核数。
+ 
+ 10
+ 最简单的如web server，如果单线程的话，一个server同时只能接受一个用户的点击。
+ 还点击率呢，直接就绿了。
+ 另外多线程和快不快没有直接关系。最主要的是可以并发执行。
+ 纯粹比较同一个任务在单线程还是多线程模式下快的话，肯定是单线程快。因为多线程会有一个线程调度的消耗。但是最为一个系统，多线程的优势是非常明显的。如果Java没有多线程直接可以去死了。
+ 当年红极一时的plam系统因为对多线程支持的不好，在网络和媒体应用方面败下阵来。
+ 
+ 11
+ 
+ 多线程效率 我认为未必会高，而且有时候相反会低。
+ 多线程并不是为了提高效率，而是不必等待 可以并行执行多条数据。
+ 可以这么想 我们通过xp系统复制文件。你可以复制一份文件这叫是单线呈，但是你要等这个复制完了才能复制另一份文件，而且不能多复制。这样很难受，所以你可以选择多复制文件,这就是多线程。但复制多份文件用的时间未必会比一份一份文件所用时间少。只是它合理利用了时间进行了多个操作。
+     如果是买票系统就会用到多线呈。买票是同时进行的，如果一个用户一个用户等下去不是办法，所以可以多个用户同时买票，效率也就提高了。这里的效率不是执行的效率而是时间的合理利用,多个线呈同时进行。
+ 
+ 12
+ 单线程,多线程,线程池,都是不同问题的不同解决策略,不存在谁的效率一定高的问题.
+ 
+ 一个时间服务器,一个线程处理请求就可以了
+ FTP,HTTP服务器,就不一样了,请求多,处理响应时间长,必须得有多个线程来处理,
+ 线程池是多线程的一种改良方式
+ 当然以上指的都是BIO的情况.
+ 在NIO下,处理请求用单线程就可以了,因为它不存在IO阻塞的问题
+ 
+ 13
+ 楼主的例子举的还算生动，但思路有点问题。在大多数场景中，各个线程不应该是同时去做同一件事情，而是各谋其职，协调工作，从而最大限度的利用系统资源。而系统资源并不仅仅是CPU，还有I/O或带宽等等。
+ 
+ 就楼主的例子而言，可以想象成两个线程，A线程的任务是挖，B线程的任务是把挖开的土石运走，从而提高效率，这也就是经典的生产者消费者模式。
+ 
+ 14
+ 生产者-消费者模型，如果你是用多线程实现了的，那完全也可以写成单线程的（当然，单线程也就是一个顺序执行，恐怕不能称为“生产-消费”了）。
+    之所以设计成生产者-消费者的模式，是因为生产者和消费者不能步调一致吧？！因为会出现等待的情况，所以要按“生产者-消费者”的方式，用多线程实现（比如3个生产者线程，2个消费者线程）。这充分利用了系统资源，如果效率还没有提高，那真不知道要干啥呢——比如说，生产者干的事就是a+1，消费者干的事就是a-1，那何必费劲做成“生产者-消费者”呢（专门做出一个生产者线程对一个消费者线程，也太傻了吧）？
+ 
+    上面已经有人说了，系统运行环境下的资源并不只有CPU，还有网络，数据库（可能安装在另一个机器上）。数据库访问和网络的IO操作都是比较耗时的，这时候CPU会闲一些。使用多线程可以调配资源的使用率。
+    
+    PS：假设你的程序部署到一个配置特牛的服务器上，感觉还是不足以应付业务量，结果一查CPU占用率，才3%，你的程序是不是写的很失败？
+ 
+ 15
+ 我觉得lz举的例子不太合适,一个CPU它不是一个工人,按WINDOWS的比喻,一个CPU应该是100个工人.
+ 100个工人挖山从一头挖,最多同时能20个人一起挖,其他80个人休息.(这是单线程)
+ 如果两头挖,最多同时40人一起挖,60个人休息.(这是多线程)
+ 所以多线程只能提高CPU的使用效率.
+ 一头挖山只使用CPU的20%,两头挖山可能就会使用CPU的50%,因为启动一条新的线程也会有CUP开销.
+ 如果在工人足够多的时候,用多多线程,是可以提前完工的.
+ 如果在工人不足的时候,只能用单线程.
+ 声明下一个CPU它不是一个人!!!
+
+ 
+
