@@ -1,18 +1,18 @@
 ## 总结
 
 利用平衡树的优势加快查询的稳定性和速度；
- B+树的数据都存储在叶子结点中，分支结点均为索引，查询时只需要扫描叶子节点，常用于数据库索引；
+B+树的数据都存储在叶子结点中，分支结点均为索引，查询时只需要扫描叶子节点，常用于数据库索引；
 
 B树其分支结点和叶子节点都存储着数据，查询时需要进行一个遍历，常用于文件索引；
 
 **B树和B+树区别：**
- 关键字数量不同：B+树分支结点M个关键字，叶子节点也有M个；B树分支结点则存在 k-1 个关键码
- 数据存储位置不同：B+树数据存储在叶子结点上；B树存储在每个结点上；
- 查询不同：B+树是从根节点到叶子节点的路径；B树是只需要找到数据就可以
- 分支节点存储信息不同：B+树存索引信息；B树存的是数据关键字
+关键字数量不同：B+树分支结点M个关键字，叶子节点也有M个；B树分支结点则存在 k-1 个关键码
+数据存储位置不同：B+树数据存储在叶子结点上；B树存储在每个结点上；
+查询不同：B+树是从根节点到叶子节点的路径；B树是只需要找到数据就可以
+分支节点存储信息不同：B+树存索引信息；B树存的是数据关键字
 
 **小结：**
- **B树：**二叉树，每个结点只存储一个关键字，等于则命中，小于走左结点，大于走右结点；
+**B树：**二叉树，每个结点只存储一个关键字，等于则命中，小于走左结点，大于走右结点；
 
 **B-树：**多路搜索树，每个结点存储M/2到M个关键字，非叶子结点存储指向关键字范围的子结点；所有关键字在整颗树中出现，且只出现一次，非叶子结点可以命中；
 
@@ -25,8 +25,8 @@ B树其分支结点和叶子节点都存储着数据，查询时需要进行一�
 ## 为什么使用B树？
 
 B类树是平衡树，每个结点到叶子结点的高度都是相同，这也保证了每个查询是稳定的，查询的时间复杂度时long2(n)；
- 其次是构造一个多阶B类树，然后在尽量多的在结点上存储相关的信息，保证层数尽量的少，以便后面我们可以更快的找到信息；
- **总结：利用平衡树的优势加快查询的稳定性和速度。**
+其次是构造一个多阶B类树，然后在尽量多的在结点上存储相关的信息，保证层数尽量的少，以便后面我们可以更快的找到信息；
+**总结：利用平衡树的优势加快查询的稳定性和速度。**
 
 ## B树简介
 
@@ -55,8 +55,8 @@ B-Tree，一个 m 阶的B树满足以下条件：
 ## 操作
 
 B树可视化的网站：[B-Trees]
- ([https://www.cs.usfca.edu/~galles/visualization/BTree.html](https://link.jianshu.com?t=https%3A%2F%2Fwww.cs.usfca.edu%2F~galles%2Fvisualization%2FBTree.html))
- 假定对高度为h的m阶B树进行操作。
+([https://www.cs.usfca.edu/~galles/visualization/BTree.html](https://link.jianshu.com?t=https%3A%2F%2Fwww.cs.usfca.edu%2F~galles%2Fvisualization%2FBTree.html))
+假定对高度为h的m阶B树进行操作。
 
 ### 插入
 
@@ -71,25 +71,21 @@ B树可视化的网站：[B-Trees]
 
 ![img](https://upload-images.jianshu.io/upload_images/5959612-c11df32046f7c405.jpg)
 
-image
-
 
 
 ![img](https://upload-images.jianshu.io/upload_images/5959612-c347422b9a94f5bb.jpg)
-
-image
 
 
 
 ![img](https://upload-images.jianshu.io/upload_images/5959612-b979b0489ef0a576.jpg)
 
-image
+
 
 
 
 ![img](https://upload-images.jianshu.io/upload_images/5959612-d9cc5aa6b00fae0d.jpg)
 
-image
+
 
 ### 删除
 
@@ -107,19 +103,17 @@ image
 
 ![img](https://upload-images.jianshu.io/upload_images/5959612-82ca66cb555eeaa6.jpg)
 
-image
-
 
 
 ![img](https://upload-images.jianshu.io/upload_images/5959612-3d9383c247d3112b.jpg)
-
-image
 
 
 
 ![img](https://upload-images.jianshu.io/upload_images/5959612-0ecb25e96e2f6210.jpg)
 
-image
+#### B树的优缺点
+
+B树主要的优点是相对于二叉树,每个节点包括更多的关键字,所以其树高相对较低,查找效率很高.
 
 # B-树
 
@@ -141,7 +135,7 @@ image
 
 ![img](https://upload-images.jianshu.io/upload_images/5959612-1225dc409bbdbd53.png)
 
-[image](https://link.jianshu.com?t=http%3A%2F%2Fimages.cnblogs.com%2Fcnblogs_com%2Fsyxchina%2F201110%2F201110012318582162.png)
+
 
 B-树的搜索，从根结点开始，对结点内的关键字（有序）序列进行二分查找，如果命中则结束，否则进入查询关键字所属范围的儿子结点；重复，直到所对应的儿子指针为空，或已经是叶子结点； ‍
 
@@ -172,12 +166,6 @@ B+树是B-树的变体，也是一种多路搜索树：
 
 ![img](https://upload-images.jianshu.io/upload_images/5959612-40926cd74ad0bc6c.png)
 
-[image](https://link.jianshu.com?t=http%3A%2F%2Fimages.cnblogs.com%2Fcnblogs_com%2Fsyxchina%2F201110%2F201110012318582096.png)
-
- ‍
-
-
-
 B+的搜索与B-树也基本相同，区别是B+树只有达到叶子结点才命中（B-树可以在非叶子结点命中），其性能也等价于在关键字全集做一次二分查找；
 
 B+的特性：
@@ -185,6 +173,20 @@ B+的特性：
  2.不可能在非叶子结点命中；
  3.非叶子结点相当于是叶子结点的索引（稀疏索引），叶子结点相当于是存储（关键字）数据的数据层；
  4.更适合文件索引系统；
+
+
+
+### B+树的优点
+
+1、**B+树的层级更少**：相较于B树B+每个非叶子节点存储的关键字数更多，树的层级更少所以查询数据更快；
+
+2、**B+树查询速度更稳定**：B+所有关键字数据地址都存在**叶子**节点上，所以每次查找的次数都相同所以查询速度要比B树更稳定;
+
+3、**B+树天然具备排序功能**：B+树所有的叶子节点数据构成了一个有序链表，在查询大小区间的数据时候更方便，数据紧密性很高，缓存的命中率也会比B树高。
+
+4、**B+树全节点遍历更快**：B+树遍历整棵树只需要遍历所有的叶子节点即可，，而不需要像B树一样需要对每一层进行遍历，这有利于数据库做全表扫描。
+
+B树相对于B+树的优点是，如果经常访问的数据离根节点很近，而B树的非叶子节点本身存有关键字其数据的地址，所以这种数据检索的时候会要比B+树快。
 
 # B树和B+树的区别
 
@@ -204,8 +206,6 @@ B+的特性：
 
 
 ![img](https://upload-images.jianshu.io/upload_images/5959612-26c5a6e59af3ea4a.png)
-
-[image](https://link.jianshu.com?t=http%3A%2F%2Fimages.cnblogs.com%2Fcnblogs_com%2Fsyxchina%2F201110%2F201110012318597013.png)
 
  ‍
 
