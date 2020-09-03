@@ -2,15 +2,15 @@
 
  
 
-*bootstrap classloader*
+**bootstrap classloader**
 
 *|*
 
-*extension classloader*
+**extension classloader**
 
 *|*
 
-*system classloader*
+**system classloader**
 
  
 
