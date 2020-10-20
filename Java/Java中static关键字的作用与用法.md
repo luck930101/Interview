@@ -43,7 +43,7 @@ static的另一个作用，就是修饰成员方法。相比于修饰成员属�
 
 static修饰成员方法最大的作用，就是可以使用”类名.方法名”的方式操作方法，避免了先要new出对象的繁琐和资源消耗，我们可能会经常在帮助类中看到它的使用：
 
-```
+```java
 public class PrintHelper {
 
     public static void print(Object o){
@@ -53,7 +53,7 @@ public class PrintHelper {
     public static void main(String[] args) {
         PrintHelper.print("Hello world");  //调用了静态方法
     }
-}12345678910
+}
 ```
 
 从上面的例子，不难发现：使得static修饰的方法成为类的方法，使用时通过“类名.方法名”的方式就可以方便的使用了，相当于定义了一个全局的函数（只要导入该类所在的包即可）。所以，相应的，非静态方法则还是要通过实例化对象，再通过“对象.方法名”的方式访问了。

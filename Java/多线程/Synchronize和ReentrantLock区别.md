@@ -43,7 +43,7 @@
 
 - synchronized既可以修饰方法，也可以修饰代码块。
 
-  ```
+  ```java
   //synchronized修饰一个方法时，这个方法叫同步方法。
   public synchronized void test() {
   //方法体``
@@ -59,7 +59,7 @@
 
 - ReentrantLock使用
 
-  ```
+  ```java
   private ReentrantLock lock = new ReentrantLock();
   public void run() {
       lock.lock();
@@ -118,7 +118,7 @@
 
 - 使用方法代码如下
 
-  ```
+  ```java
   private ReentrantLock lock = new ReentrantLock();
   public void run() {
       lock.lock();
@@ -130,9 +130,8 @@
           lock.unlock();
       }
   }
-  复制代码
   ```
-
+  
 - 注意问题：为保证锁释放，每一个 lock() 动作，建议都立即对应一都立即对应一个 try-catch-finally
 
 ### 4.ReentrantLock锁机制测试案例分析
@@ -141,7 +140,7 @@
 
 - 代码如下所示
 
-  ```
+  ```java
   private void test2() {
       Runnable t1 = new MyThread();
       new Thread(t1,"t1").start();
@@ -215,7 +214,7 @@
   - 2、非公平锁保证：老的线程排队使用锁；但是无法保证新线程抢占已经在排队的线程的锁。
   - 看下面代码案例所示：可以得出结论，公平锁指的是哪个线程先运行，那就可以先得到锁。非公平锁是不管线程是否是先运行，新的线程都有可能抢占已经在排队的线程的锁。
 
-  ```
+  ```java
   private void test3() {
       Service service = new Service();
       ThreadClass tcArray[] = new ThreadClass[10];
@@ -290,7 +289,6 @@
   10-17 19:34:58.115 7089-7190/com.yc.cn.ycbaseadapter I/System.out: Thread-12 已经被锁定
   10-17 19:34:58.116 7089-7191/com.yc.cn.ycbaseadapter I/System.out: Thread-13 抢到了锁
   10-17 19:34:58.116 7089-7191/com.yc.cn.ycbaseadapter I/System.out: Thread-13 已经被锁定
-  复制代码
   ```
 
 ### 5.问答测试题

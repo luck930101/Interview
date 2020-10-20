@@ -215,7 +215,7 @@ public final void acquire(int arg) {
 
 同时，加到链表末尾的操作使用了 CAS+死循环的模式，很有代表性，拿出来看一看：
 
-```
+```java
 Node node = new Node(mode);
 for (;;) {
     Node oldTail = tail;
@@ -243,7 +243,7 @@ for (;;) {
 
 可以看到，一个线程最多有两次机会，还竞争不到就去挂起等待。
 
-```
+```java
 final boolean acquireQueued(final Node node, int arg) {
     try {
         boolean interrupted = false;
@@ -263,7 +263,6 @@ final boolean acquireQueued(final Node node, int arg) {
         throw t;
     }
 }
-复制代码
 ```
 
 ## 释放锁
@@ -271,7 +270,7 @@ final boolean acquireQueued(final Node node, int arg) {
 - 调用 tryRelease，此方法由子类实现。实现非常简单，如果当前线程是持有锁的线程，就将 state 减1。减完后如果 state 大于0，表示当前线程仍然持有锁，返回 false。如果等于0，表示已经没有线程持有锁，返回 true，进入下一步；
 - 如果头部节点的 waitStatus 不等于0，则调用LockSupport.unpark()唤醒其下一个节点。头部节点的下一个节点就是等待队列中的第一个线程，这反映了 AQS 先进先出的特点。另外，即使是非公平锁，进入队列之后，还是得按顺序来。
 
-```
+```java
 public final boolean release(int arg) {
     if (tryRelease(arg)) { //将 state 减1
         Node h = head;
@@ -304,7 +303,7 @@ private void unparkSuccessor(Node node) {
 
 上面分析的是非公平锁，那公平锁呢？很简单，在竞争锁之前判断一下等待队列中有没有线程在等待就行了。
 
-```
+```java
 protected final boolean tryAcquire(int acquires) {
     final Thread current = Thread.currentThread();
     int c = getState();
