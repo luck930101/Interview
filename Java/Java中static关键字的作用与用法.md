@@ -80,7 +80,7 @@ class Singleton{
         }
         return instance;
     }
-}12345678910
+}
 ```
 
 ## 静态块

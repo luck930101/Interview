@@ -17,9 +17,7 @@ ConcurrentHashMap的结构图如下（网友贡献的图，哈）：
 
 
 
-![img](https:////upload-images.jianshu.io/upload_images/2843224-25151c12024f0bfb.png?imageMogr2/auto-orient/strip|imageView2/2/w/555/format/webp)
-
-Paste_Image.png
+![img](https:////upload-images.jianshu.io/upload_images/2843224-25151c12024f0bfb.png)
 
 #### JDK1.8中的实现
 
@@ -30,9 +28,7 @@ JDK1.8的ConcurrentHashMap的结构图如下：
 
 
 
-![img](https:////upload-images.jianshu.io/upload_images/2843224-59ca97f3ae25b043.png?imageMogr2/auto-orient/strip|imageView2/2/w/681/format/webp)
-
-Paste_Image.png
+![img](https:////upload-images.jianshu.io/upload_images/2843224-59ca97f3ae25b043.png)
 
 > **TreeBin:** 红黑二叉树节点
 >  **Node:** 链表节点
