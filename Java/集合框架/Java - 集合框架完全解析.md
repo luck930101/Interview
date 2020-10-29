@@ -21,7 +21,7 @@
 
 
 
-![img](https:////upload-images.jianshu.io/upload_images/2243690-9cd9c896e0d512ed.gif?imageMogr2/auto-orient/strip|imageView2/2/w/643/format/webp)
+![img](https:////upload-images.jianshu.io/upload_images/2243690-9cd9c896e0d512ed.gif)
 
 Java集合框架
 
@@ -33,7 +33,7 @@ Collection接口是处理对象集合的根接口，其中定义了很多对元�
 
 
 
-![img](https:////upload-images.jianshu.io/upload_images/2243690-52a75aed9de21b68.png?imageMogr2/auto-orient/strip|imageView2/2/w/475/format/webp)
+![img](https:////upload-images.jianshu.io/upload_images/2243690-52a75aed9de21b68.png)
 
 Collection接口结构
 
@@ -275,9 +275,7 @@ public class TestSet {
 
 队列是一种先进先出的数据结构，元素在队列末尾添加，在队列头部删除。Queue接口扩展自Collection，并提供插入、提取、检验等操作。
 
-
-
-![img](https://https://upload-images.jianshu.io/upload_images/2243690-9cd9c896e0d512ed.gif)
+![img](https://img-blog.csdnimg.cn/20181228155151389)
 
 Queue接口结构
 
@@ -315,7 +313,7 @@ Map，图，是一种存储键值对映射的容器类，在Map中键可以是�
 
 
 
-![img](https:////upload-images.jianshu.io/upload_images/2243690-78354bae85e2dc3c.png?imageMogr2/auto-orient/strip|imageView2/2/w/564/format/webp)
+![img](https:////upload-images.jianshu.io/upload_images/2243690-78354bae85e2dc3c.png)
 
 接口Map的结构
 
@@ -327,7 +325,7 @@ HashMap是基于哈希表的Map接口的非同步实现，继承自AbstractMap�
 
 
 
-![img](https:////upload-images.jianshu.io/upload_images/2243690-ec848d862c725e8d.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/515/format/webp)
+![img](https:////upload-images.jianshu.io/upload_images/2243690-ec848d862c725e8d.jpg)
 
 HashMap原理.jpg
 

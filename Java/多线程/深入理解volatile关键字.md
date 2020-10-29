@@ -269,7 +269,7 @@ Volatile 变量具有 `synchronized` 的可见性特性，但是不具备原子�
 
 ##### 清单 1. 非线程安全的数值范围类
 
-```
+```java
 @NotThreadSafe 
 public class NumberRange {
     private int lower, upper;
@@ -313,7 +313,7 @@ volatile 操作不会像锁一样造成阻塞，因此，在能够安全使用 v
 
 ##### 清单 2. 将 volatile 变量作为状态标志使用
 
-```
+```java
 volatile boolean shutdownRequested;
 
 ...
@@ -339,7 +339,7 @@ public void doWork() {
 
 ##### 清单 3. 将 volatile 变量用于一次性安全发布
 
-```
+```java
 public class BackgroundFloobleLoader {
     public volatile Flooble theFlooble;
 
@@ -373,7 +373,7 @@ public class SomeOtherClass {
 
 ##### 清单 4. 将 volatile 变量用于多个独立观察结果的发布
 
-```
+```java
 public class UserManager {
     public volatile String lastUser;
 
@@ -399,7 +399,7 @@ volatile bean 模式适用于将 JavaBeans 作为“荣誉结构”使用的框�
 
 ##### 清单 5. 遵守 volatile bean 模式的 Person 对象
 
-```
+```java
 @ThreadSafe
 public class Person {
     private volatile String firstName;
