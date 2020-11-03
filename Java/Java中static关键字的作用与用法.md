@@ -70,7 +70,7 @@ static一个很重要的用途就是实现单例设计模式。
 
 单例设计模式的特点是该类只能有一个实例，为了实现这一功能，必须隐藏类的构造函数，即把构造函数声明为private，并提供一个创建对象的方法，由于构造对象被声明为private，外界无法直接创建这个类型的对象，只能通过该类提供的方法来获取类的对象，要达到这样的目的只能把创建对象的方法声明为static，程序实例如下：
 
-```
+```java
 class Singleton{
     private static Singleton instance = null;
     private Singleton(){}
