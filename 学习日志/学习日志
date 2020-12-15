@@ -9,15 +9,22 @@
 1. ThreadLocal
 2. AOP
 3. 计算机为什么要有三次握手
-4. 
+4. tcp time wait
+5. volatile 和synchronized
 
 # 12月13日
 
+操作系统页大小
 
+volatile 和synchronized
+
+jvm 垃圾回收
 
 # 12月14日
 
 TCP三次握手四次挥手
+
+学习快手面经
 
 # 12月15日
 
