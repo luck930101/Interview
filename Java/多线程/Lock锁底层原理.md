@@ -28,21 +28,7 @@ synchronized是**java底层支持的**，而concurrent包则是**jdk实现**。
 
 ```java
   public ReentrantLock() {
-
-
-
- 
-
-
-
         sync = new NonfairSync();
-
-
-
- 
-
-
-
     }
 ```
 
@@ -96,21 +82,7 @@ abstract static class Sync extends AbstractQueuedSynchronizer
 
 ```java
 public void lock() {
-
-
-
- 
-
-
-
     sync.lock();
-
-
-
- 
-
-
-
 }
 ```
 
@@ -128,34 +100,11 @@ public void lock() {
 public final void acquire(int arg) {
 
 
-
- 
-
-
-
     if (!tryAcquire(arg) &&
-
-
-
- 
-
-
 
         acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
 
-
-
- 
-
-
-
         selfInterrupt();
-
-
-
- 
-
-
 
 }
 ```
@@ -200,21 +149,7 @@ enq是个自旋+上述逻辑，有兴趣的可以翻翻源码。
 
 ```java
 public void unlock() {
-
-
-
- 
-
-
-
     sync.release(1);
-
-
-
- 
-
-
-
 }
 ```
 
